@@ -16,6 +16,7 @@ import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
 import org.fife.ui.rsyntaxtextarea.Token;
 import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import creatorxml.CreatorXML;
 
 /**
  *
@@ -102,6 +103,18 @@ public class Ide extends javax.swing.JFrame {
         }
     }
 
+    public void interpretar(){
+        String nombre = tabcontrol.getTitleAt(tabcontrol.getSelectedIndex());
+        
+        if(nombre.endsWith(".gxml")){
+            //interpretar gxml
+            JPanel pan =(JPanel)(tabcontrol.getSelectedComponent());
+            RTextScrollPane rtsp = (RTextScrollPane) pan.getComponent(0);
+            RSyntaxTextArea texto = (RSyntaxTextArea) rtsp.getTextArea();
+            
+            CreatorXML.analizarGXML(texto.getText());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,7 +127,7 @@ public class Ide extends javax.swing.JFrame {
         tabcontrol = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btn_compilar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_archivo = new javax.swing.JMenu();
         btn_abrir = new javax.swing.JMenuItem();
@@ -133,7 +146,12 @@ public class Ide extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons8-reproducir-en-círculo-48.png"))); // NOI18N
+        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons8-reproducir-en-círculo-48.png"))); // NOI18N
+        btn_compilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_compilarActionPerformed(evt);
+            }
+        });
 
         menu_archivo.setText("Archivo");
 
@@ -184,14 +202,14 @@ public class Ide extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(505, 505, 505)
-                .addComponent(jButton1)
+                .addComponent(btn_compilar)
                 .addContainerGap(505, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btn_compilar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabcontrol, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,6 +224,11 @@ public class Ide extends javax.swing.JFrame {
         // TODO add your handling code here:
         createTab();
     }//GEN-LAST:event_btn_nuevotabActionPerformed
+
+    private void btn_compilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_compilarActionPerformed
+        // TODO add your handling code here:
+        interpretar();
+    }//GEN-LAST:event_btn_compilarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,11 +268,11 @@ public class Ide extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btn_abrir;
     private javax.swing.JMenuItem btn_cerrartab;
+    private javax.swing.JButton btn_compilar;
     private javax.swing.JMenuItem btn_guardar;
     private javax.swing.JMenuItem btn_guardarcomo;
     private javax.swing.JMenuItem btn_nuevotab;
     private javax.swing.JMenuItem btn_reporterror;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

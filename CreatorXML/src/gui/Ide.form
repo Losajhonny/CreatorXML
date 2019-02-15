@@ -95,7 +95,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="505" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_compilar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="505" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -104,7 +104,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btn_compilar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tabcontrol" min="-2" pref="355" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -134,12 +134,15 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btn_compilar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resource/icons8-reproducir-en-c&#xed;rculo-48.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_compilarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

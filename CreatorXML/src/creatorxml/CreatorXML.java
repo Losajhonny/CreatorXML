@@ -5,17 +5,30 @@
  */
 package creatorxml;
 
+import analizadores.gxml.Parser_gxml;
+import analizadores.gxml.Scanner_gxml;
+import java.io.BufferedReader;
+import java.io.StringReader;
+
 /**
  *
  * @author Jhona
  */
 public class CreatorXML {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    public static void analizarGXML(String entrada){
+        //analizaremos la entrada
+        Scanner_gxml lexico = new Scanner_gxml(new BufferedReader(new StringReader(entrada)));
+        Parser_gxml parser = new Parser_gxml(lexico);
+        
+        try{
+            parser.parse();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
+    public static void analizarFS(String nombre, String entrada){
+        
+    }
 }

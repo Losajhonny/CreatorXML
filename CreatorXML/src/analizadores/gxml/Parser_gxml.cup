@@ -1,1 +1,71 @@
+package analizadores.gxml;
+
+import java_cup.runtime.*;
+
+parser code {:
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s) {
+        StringBuilder m = new StringBuilder("Error Sintactico");
+        int yline = s.left, ycol = s.right;
+
+        if(s.left >= 0) {
+        	m.append(" en la Linea " + (s.left));
+        	if(s.right >= 0) {
+        		m.append(" Columna " + (s.right));
+        	}
+        	m.append(". No se esperaba este componente: " + s.value + ".");
+        }
+        System.out.println(m);
+    }
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+        syntax_error(s);
+    }
+:}
+
+//--------------------------------------------------------------------------------
+//---------------------------------- TERMINALES ----------------------------------
+//--------------------------------------------------------------------------------
+
+terminal String pr_importar, pr_ventana, pr_contenedor, pr_texto, pr_dato, pr_listadatos, 
+pr_defecto, pr_control, pr_multimedia, pr_boton, pr_enviar, pr_verdadero, pr_falso, 
+pr_id, pr_tipo, pr_color, pr_accioninicial, pr_accionfinal, pr_x, pr_y, pr_alto, 
+pr_borde, pr_nombre, pr_fuente, pr_tam, pr_negrita, pr_cursiva, pr_maximo, pr_minimo, pr_accion, 
+pr_referencia, pr_path, pr_autoreproduccion;
+
+terminal String men, may, slash, igual;
+terminal String cadena, numero;
+
+//--------------------------------------------------------------------------------
+//-------------------------------- NO TERMINALES ---------------------------------
+//--------------------------------------------------------------------------------
+
+non terminal Object S, IMPORT, IMPORTS, WINDOWS;
+
+//--------------------------------------------------------------------------------
+//---------------------------------- GRAMATICA -----------------------------------
+//--------------------------------------------------------------------------------
+
+start with S;
+
+S       ::= IMPORTS WINDOWS
+        | WINDOWS;
+
+IMPORTS ::= IMPORTS IMPORT
+        | IMPORT
+        ;
+
+IMPORT ::= men pr_importar may men slash pr_importar may;
+
+WINDOWS ::= WINDOWS WINDOW
+        | WINDOW
+        ;
+
+WINDOW ::= men pr_ventana ELENTS_WINDOW may CONTAINERS 
 
