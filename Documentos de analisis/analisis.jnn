@@ -1,0 +1,37 @@
+Creator XML
+
+Componenetes de la aplicacion
+
+1. FuncionScript (FS) Permite utilizar el motor de Creator XML
+para poder generar interfaces de usuario a partir de plantillas 
+xml escritas en GenericXML
+
+2. GenericXML Lenguaje basado en XML este se utilizar para definir
+las interfaces de usuario
+
+Requerimientos Funcionales
+
+Requerimientos No Funcionales
+
+1. Tener un formato de colores para la sintaxis de los lenguajes
+2. Por cada interfaz de usuario creado se debera generar
+un archivo GenericXML que esta basado en el lenguaje XML
+para la recoleccion de datos
+
+
+
+
+Lenguaje Generic XML
+
+1. En este lenguaje se definiran los colores para poder diferenciar
+las palabras reservadas, cadenas, numeros, comentarios, entre otros
+en el archivo de entrada.
+
+Azul    ------ Palabras Reservadas
+Naranja ------ Cadenas, Caracteres
+Morado  ------ Numeros
+Gris    ------ Comentarios
+Negro   ------ Otros
+
+2. El lenguaje es case insensitive no permite la diferencia entre
+minusculas y mayusculas
