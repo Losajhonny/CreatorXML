@@ -8,47 +8,52 @@ package analizadores.gxml;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int slash = 37;
-  public static final int pr_boton = 11;
+  public static final int slash = 35;
+  public static final int pr_boton = 14;
   public static final int pr_ventana = 3;
-  public static final int igual = 38;
-  public static final int pr_cursiva = 28;
-  public static final int pr_negrita = 27;
-  public static final int men = 35;
-  public static final int pr_fuente = 25;
-  public static final int pr_enviar = 12;
-  public static final int pr_autoreproduccion = 34;
-  public static final int pr_verdadero = 13;
-  public static final int pr_tam = 26;
-  public static final int pr_alto = 22;
-  public static final int pr_nombre = 24;
-  public static final int numero = 40;
+  public static final int llfuncion = 42;
+  public static final int pr_ancho = 24;
+  public static final int igual = 37;
+  public static final int pr_cursiva = 30;
+  public static final int pr_negrita = 29;
+  public static final int men = 34;
+  public static final int pr_fuente = 27;
+  public static final int pr_enviar = 15;
+  public static final int pr_autoreproduccion = 12;
+  public static final int pr_verdadero = 44;
+  public static final int pr_tam = 28;
+  public static final int ruta = 38;
+  public static final int pr_alto = 23;
+  public static final int pr_nombre = 26;
   public static final int may = 36;
   public static final int pr_importar = 2;
   public static final int EOF = 0;
-  public static final int pr_y = 21;
-  public static final int pr_x = 20;
+  public static final int pr_y = 22;
+  public static final int pr_x = 21;
   public static final int pr_listadatos = 7;
   public static final int error = 1;
-  public static final int pr_multimedia = 10;
-  public static final int pr_color = 17;
+  public static final int entero = 39;
+  public static final int pr_multimedia = 13;
+  public static final int pr_color = 18;
   public static final int pr_contenedor = 4;
-  public static final int pr_minimo = 30;
-  public static final int pr_defecto = 8;
-  public static final int pr_control = 9;
-  public static final int pr_falso = 14;
-  public static final int pr_accionfinal = 19;
-  public static final int pr_id = 15;
-  public static final int pr_tipo = 16;
+  public static final int pr_minimo = 32;
+  public static final int pr_defecto = 10;
+  public static final int pr_control = 6;
+  public static final int pr_falso = 43;
+  public static final int pr_accionfinal = 20;
+  public static final int pr_id = 16;
+  public static final int pr_tipo = 17;
   public static final int pr_texto = 5;
-  public static final int pr_dato = 6;
-  public static final int pr_path = 33;
-  public static final int pr_accioninicial = 18;
-  public static final int pr_accion = 31;
-  public static final int pr_borde = 23;
-  public static final int pr_referencia = 32;
-  public static final int pr_maximo = 29;
-  public static final int cadena = 39;
+  public static final int pr_dato = 8;
+  public static final int pr_path = 11;
+  public static final int pr_accioninicial = 19;
+  public static final int pr_accion = 33;
+  public static final int pr_borde = 25;
+  public static final int pr_referencia = 9;
+  public static final int todo = 45;
+  public static final int decimal = 40;
+  public static final int pr_maximo = 31;
+  public static final int cadena = 41;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -56,15 +61,16 @@ public class sym {
   "pr_ventana",
   "pr_contenedor",
   "pr_texto",
-  "pr_dato",
-  "pr_listadatos",
-  "pr_defecto",
   "pr_control",
+  "pr_listadatos",
+  "pr_dato",
+  "pr_referencia",
+  "pr_defecto",
+  "pr_path",
+  "pr_autoreproduccion",
   "pr_multimedia",
   "pr_boton",
   "pr_enviar",
-  "pr_verdadero",
-  "pr_falso",
   "pr_id",
   "pr_tipo",
   "pr_color",
@@ -73,6 +79,7 @@ public class sym {
   "pr_x",
   "pr_y",
   "pr_alto",
+  "pr_ancho",
   "pr_borde",
   "pr_nombre",
   "pr_fuente",
@@ -82,15 +89,18 @@ public class sym {
   "pr_maximo",
   "pr_minimo",
   "pr_accion",
-  "pr_referencia",
-  "pr_path",
-  "pr_autoreproduccion",
   "men",
-  "may",
   "slash",
+  "may",
   "igual",
+  "ruta",
+  "entero",
+  "decimal",
   "cadena",
-  "numero"
+  "llfuncion",
+  "pr_falso",
+  "pr_verdadero",
+  "todo"
   };
 }
 

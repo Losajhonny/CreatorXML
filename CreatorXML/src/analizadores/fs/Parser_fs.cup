@@ -1,1 +1,69 @@
+package analizadores.fs;
 
+import java_cup.runtime.*;
+
+parser code {:
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s) {
+        StringBuilder m = new StringBuilder("Error Sintactico");
+        int yline = s.left, ycol = s.right;
+
+        if(s.left >= 0) {
+        	m.append(" en la Linea " + (s.left));
+        	if(s.right >= 0) {
+        		m.append(" Columna " + (s.right));
+        	}
+        	m.append(". No se esperaba este componente: " + s.value + ".");
+        }
+        System.out.println(m);
+    }
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+        syntax_error(s);
+    }
+:}
+
+//--------------------------------------------------------------------------------
+//---------------------------------- TERMINALES ----------------------------------
+//--------------------------------------------------------------------------------
+
+terminal String pr_nulo, pr_verdadero, pr_falso, pr_var, 
+pr_importar, pr_detener, pr_selecciona, pr_caso, pr_retornar,
+pr_si, pr_sino, pr_funcion, pr_descendente, pr_ascendente, 
+pr_creararraydesdearchivo, pr_invertir, pr_maximo, pr_minimo,
+pr_filtrar, pr_buscar, pr_map, pr_reducir, pr_todos, pr_alguno,
+pr_leergxml, pr_obtenerporetiqueta, pr_obtenerporid, pr_obtenerpornombre,
+pr_crearventana, pr_crearcontenedor, pr_creartexto, pr_crearcajatexto,
+pr_crearareatexto, pr_crearcontrolnumerico, pr_creardesplegable, pr_crearboton,
+pr_crearimagen, pr_crearreproductor, pr_crearvideo, pr_alclic, pr_alcargar,
+pr_alcerrar, pari, pard, llai, llad, cori, cord, punto, coma, dospuntos,
+ptcoma, igual, inter, mas, men, por, div, pot, masmas, menmen, mayor, menor,
+mayorigual, menorigual, igualigual, diferente, and, or, not, masigual, porigual,
+menigual, divigual, asigesp, entero, decimal, cadena, id;
+
+//--------------------------------------------------------------------------------
+//-------------------------------- NO TERMINALES ---------------------------------
+//--------------------------------------------------------------------------------
+
+non terminal Object S;
+
+//--------------------------------------------------------------------------------
+//--------------------------------- PRECEDENCIA ----------------------------------
+//--------------------------------------------------------------------------------
+
+precedence left mas, men;
+precedence left por, div;
+
+//--------------------------------------------------------------------------------
+//---------------------------------- GRAMATICA -----------------------------------
+//--------------------------------------------------------------------------------
+
+start with S;
+
+S       ::= mas;

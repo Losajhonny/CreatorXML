@@ -33,20 +33,40 @@ parser code {:
 //---------------------------------- TERMINALES ----------------------------------
 //--------------------------------------------------------------------------------
 
-terminal String pr_importar, pr_ventana, pr_contenedor, pr_texto, pr_dato, pr_listadatos, 
-pr_defecto, pr_control, pr_multimedia, pr_boton, pr_enviar, pr_verdadero, pr_falso, 
-pr_id, pr_tipo, pr_color, pr_accioninicial, pr_accionfinal, pr_x, pr_y, pr_alto, 
-pr_borde, pr_nombre, pr_fuente, pr_tam, pr_negrita, pr_cursiva, pr_maximo, pr_minimo, pr_accion, 
-pr_referencia, pr_path, pr_autoreproduccion;
+terminal String pr_importar, pr_ventana, pr_contenedor, pr_texto, pr_control,
+pr_listadatos, pr_dato, pr_referencia, pr_defecto, pr_path, pr_autoreproduccion,
+pr_multimedia, pr_boton, pr_enviar;
 
-terminal String men, may, slash, igual;
-terminal String cadena, numero;
+terminal String pr_id, pr_tipo, pr_color,
+pr_accioninicial, pr_accionfinal, pr_x, pr_y, pr_alto, pr_ancho,
+pr_borde, pr_nombre, pr_fuente, pr_tam, pr_negrita, pr_cursiva,
+pr_maximo, pr_minimo, pr_accion;
+
+terminal String men, slash, may, igual;
+terminal String ruta, entero, decimal, cadena, llfuncion, pr_falso, pr_verdadero, todo;
 
 //--------------------------------------------------------------------------------
 //-------------------------------- NO TERMINALES ---------------------------------
 //--------------------------------------------------------------------------------
 
-non terminal Object S, IMPORT, IMPORTS, WINDOWS;
+non terminal Object S;
+non terminal Object IMPORTACIONES, IMPORTAR;
+non terminal Object VENTANAS, VENTANA, ELEMENTOS_VENTANA, ELEMENTO_VENTANA;
+non terminal Object CONTENEDORES, CONTENEDOR, ELEMENTOS_CONTENEDOR, ELEMENTO_CONTENEDOR;
+non terminal Object INSTRUCCIONES, INSTRUCCION;
+non terminal Object TEXTO, ELEMENTOS_TEXTO, ELEMENTO_TEXTO;
+non terminal Object CONTROLADOR, ELEMENTOS_CONTROLADOR, ELEMENTO_CONTROLADOR;
+non terminal Object LISTA_DATO, DATOS, DATO, DEFECTO;
+non terminal Object ESPECIALES, ESPECIAL;
+non terminal Object MULTIMEDIA, ELEMENTOS_MULTIMEDIA, ELEMENTO_MULTIMEDIA;
+non terminal Object BOTON, ELEMENTOS_BOTON, ELEMENTO_BOTON;
+non terminal Object ENVIAR, ELEMENTOS_ENVIAR, ELEMENTO_ENVIAR;
+
+non terminal Object ID, TIPO, COLOR, ACCIONINI, ACCIONFIN;
+non terminal Object X, Y, ALTO, ANCHO, BORDE;
+non terminal Object NOMBRE, FUENTE, TAM, NEGRITA, CURSIVA;
+non terminal Object MAXIMO, MINIMO, ACCION, REFERENCIA;
+non terminal Object PATH, AUTO_REPRODUCCION;
 
 //--------------------------------------------------------------------------------
 //---------------------------------- GRAMATICA -----------------------------------
@@ -54,18 +74,253 @@ non terminal Object S, IMPORT, IMPORTS, WINDOWS;
 
 start with S;
 
-S       ::= IMPORTS WINDOWS
-        | WINDOWS;
-
-IMPORTS ::= IMPORTS IMPORT
-        | IMPORT
+S       ::= VENTANAS
         ;
 
-IMPORT ::= men pr_importar may men slash pr_importar may;
+/**********************IMPORTAR**********************/
 
-WINDOWS ::= WINDOWS WINDOW
-        | WINDOW
+IMPORTACIONES   ::= IMPORTACIONES IMPORTAR
+                |   IMPORTAR
+                ;
+
+IMPORTAR    ::= men pr_importar may ruta men slash pr_importar may;
+
+/**********************VENTANA**********************/
+
+VENTANAS    ::= VENTANAS VENTANA
+            |   VENTANA
+            ;
+
+VENTANA     ::= men pr_ventana ELEMENTOS_VENTANA may CONTENEDORES men slash pr_ventana may
+        |   men pr_ventana ELEMENTOS_VENTANA may men slash pr_ventana may;
+
+ELEMENTOS_VENTANA   ::= ELEMENTOS_VENTANA ELEMENTO_VENTANA
+                    |   ELEMENTO_VENTANA
+                    ;
+
+ELEMENTO_VENTANA   ::=  ID
+                    |   TIPO
+                    |   COLOR
+                    |   ACCIONINI
+                    |   ACCIONFIN
+                    ;
+
+/**********************CONTENEDORES***********************/
+
+CONTENEDORES    ::= CONTENEDORES CONTENEDOR
+                |   CONTENEDOR
+                ;
+
+CONTENEDOR  ::= men pr_contenedor ELEMENTOS_CONTENEDOR may men slash pr_contenedor may
+            |   men pr_contenedor ELEMENTOS_CONTENEDOR may INSTRUCCIONES men slash pr_contenedor may;
+
+ELEMENTOS_CONTENEDOR    ::= ELEMENTOS_CONTENEDOR ELEMENTO_CONTENEDOR
+                        |   ELEMENTO_CONTENEDOR
+                        ;
+
+ELEMENTO_CONTENEDOR ::= ID
+                    |   X
+                    |   Y
+                    |   ALTO
+                    |   ANCHO
+                    |   COLOR
+                    |   BORDE
+                    ;
+
+/**********************INSTRUCCIONES**********************/
+
+INSTRUCCIONES   ::= INSTRUCCIONES INSTRUCCION
+                |   INSTRUCCION
+                ;
+
+INSTRUCCION ::= TEXTO
+            |   CONTROLADOR
+            |   MULTIMEDIA
+            |   BOTON
+            |   ENVIAR
+            ;
+
+TEXTO   ::= men pr_texto ELEMENTOS_TEXTO todo slash pr_texto may;
+
+ELEMENTOS_TEXTO ::= ELEMENTOS_TEXTO ELEMENTO_TEXTO
+                |   ELEMENTO_TEXTO
+                ;
+
+ELEMENTO_TEXTO  ::= NOMBRE
+                |   X
+                |   Y
+                |   FUENTE
+                |   TAM
+                |   COLOR
+                |   NEGRITA
+                |   CURSIVA
+                ;
+
+MULTIMEDIA  ::= men pr_multimedia ELEMENTOS_MULTIMEDIA may men slash pr_multimedia may;
+
+ELEMENTOS_MULTIMEDIA    ::= ELEMENTOS_MULTIMEDIA ELEMENTO_MULTIMEDIA
+                        |   ELEMENTO_MULTIMEDIA
+                        ;
+
+ELEMENTO_MULTIMEDIA     ::= PATH
+                        |   TIPO
+                        |   NOMBRE
+                        |   X
+                        |   Y
+                        |   ALTO
+                        |   ANCHO
+                        |   AUTO_REPRODUCCION
+                        ;
+
+BOTON   ::= men pr_boton ELEMENTOS_BOTON may TEXTO men slash pr_boton may
+        |   men pr_boton ELEMENTOS_BOTON todo slash pr_boton may
         ;
 
-WINDOW ::= men pr_ventana ELENTS_WINDOW may CONTAINERS 
+ELEMENTOS_BOTON ::= ELEMENTOS_BOTON ELEMENTO_BOTON
+                |   ELEMENTO_BOTON
+                ;
 
+ELEMENTO_BOTON  ::= NOMBRE
+                |   X
+                |   Y
+                |   ALTO
+                |   ANCHO
+                |   REFERENCIA
+                |   ACCION
+                ;
+
+ENVIAR  ::= men pr_enviar ELEMENTOS_ENVIAR may TEXTO men slash pr_enviar may
+        |   men pr_enviar ELEMENTOS_ENVIAR todo slash pr_enviar may
+        ;
+
+ELEMENTOS_ENVIAR    ::= ELEMENTOS_ENVIAR ELEMENTO_ENVIAR
+                    |   ELEMENTO_ENVIAR
+                    ;
+
+ELEMENTO_ENVIAR ::= NOMBRE
+                |   X
+                |   Y
+                |   ALTO
+                |   ANCHO
+                |   REFERENCIA
+                |   ACCION
+                ;
+
+/**********************CONTROLADOR**********************/
+
+CONTROLADOR ::= men pr_control ELEMENTOS_CONTROLADOR may ESPECIALES men slash pr_control may
+            |   men pr_control ELEMENTOS_CONTROLADOR may men slash pr_control may
+            ;
+
+ELEMENTOS_CONTROLADOR   ::= ELEMENTOS_CONTROLADOR ELEMENTO_CONTROLADOR
+                        |   ELEMENTO_CONTROLADOR
+                        ;
+
+ELEMENTO_CONTROLADOR    ::= TIPO
+                        |   NOMBRE
+                        |   X
+                        |   Y
+                        |   ALTO
+                        |   ANCHO
+                        |   FUENTE
+                        |   TAM
+                        |   COLOR
+                        |   NEGRITA
+                        |   CURSIVA
+                        |   MAXIMO
+                        |   MINIMO
+                        |   ACCION
+                        ;
+
+/**********************CONTROL**********************/
+
+ESPECIALES  ::= ESPECIALES ESPECIAL
+            |   ESPECIAL
+            ;
+
+ESPECIAL    ::= LISTA_DATO
+            |   DEFECTO
+            ;
+
+LISTA_DATO  ::= men pr_listadatos ACCION may DATOS men slash pr_listadatos may
+            |   men pr_listadatos may DATOS men slash pr_listadatos may
+            ;
+
+DATOS   ::= DATOS DATO
+        |   DATO
+        ;
+
+DATO    ::= men pr_dato REFERENCIA todo slash pr_dato may
+        |   men pr_dato todo slash pr_dato may
+        ;
+
+DEFECTO ::= men pr_defecto may entero men slash pr_defecto may
+        |   men pr_defecto may decimal men slash pr_defecto may
+        |   men pr_defecto todo slash pr_defecto may
+        ;
+
+/**********************ELEMENTOS**********************/
+
+ID  ::= pr_id igual cadena;
+
+TIPO    ::= pr_tipo igual cadena;
+
+COLOR   ::= pr_color igual cadena;
+
+ACCIONINI   ::= pr_accioninicial igual llfuncion;
+
+ACCIONFIN   ::= pr_accionfinal igual llfuncion;
+
+X   ::= pr_x igual entero
+    |   pr_x igual decimal
+    ;
+
+Y   ::= pr_y igual entero
+    |   pr_y igual decimal
+    ;
+
+ALTO    ::= pr_alto igual entero
+        |   pr_alto igual decimal
+        ;
+
+ANCHO   ::= pr_ancho igual entero
+        |   pr_ancho igual decimal
+        ;
+
+BORDE   ::= pr_borde igual pr_verdadero
+        |   pr_borde igual pr_falso
+        ;
+
+NOMBRE  ::= pr_nombre igual cadena;
+
+FUENTE  ::= pr_fuente igual cadena;
+
+TAM ::= pr_tam igual entero
+    |   pr_tam igual decimal
+    ;
+
+NEGRITA ::= pr_negrita igual pr_verdadero
+        |   pr_negrita igual pr_falso
+        ;
+
+CURSIVA ::= pr_cursiva igual pr_verdadero
+        |   pr_cursiva igual pr_falso
+        ;
+
+MAXIMO  ::= pr_maximo igual entero
+        |   pr_maximo igual decimal
+        ;
+
+MINIMO  ::= pr_minimo igual entero
+        |   pr_minimo igual decimal
+        ;
+
+ACCION  ::= pr_accion igual llfuncion;
+
+REFERENCIA  ::= pr_referencia igual cadena;
+
+PATH    ::= pr_path igual cadena;
+
+AUTO_REPRODUCCION   ::= pr_autoreproduccion igual pr_verdadero
+                    |   pr_autoreproduccion igual pr_falso
+                    ;
